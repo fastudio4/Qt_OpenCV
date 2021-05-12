@@ -19,15 +19,16 @@ set(SOURCE
     application.h
     )
 
-
-find_package(QT NAMES Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia)
+find_package(Qt5MultimediaWidgets)
 
 
 find_package(OpenCV REQUIRED)
-include_directories( ${OpenCV_INCLUDE_DIRS} )
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME} ${SOURCE})
 
-target_link_libraries(connection_openCV PRIVATE Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Multimedia)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::MultimediaWidgets)
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIB})
